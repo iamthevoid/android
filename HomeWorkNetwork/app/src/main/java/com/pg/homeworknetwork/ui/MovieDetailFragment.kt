@@ -1,4 +1,4 @@
-package com.pg.homeworknetwork
+package com.pg.homeworknetwork.ui
 
 import android.os.Bundle
 import android.view.View
@@ -10,13 +10,20 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.pg.homeworknetwork.BuildConfig
+import com.pg.homeworknetwork.data.Client
+import com.pg.homeworknetwork.data.Movie
+import com.pg.homeworknetwork.R
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_preview) {
-    lateinit var poster: ImageView
-    lateinit var originalTitle: TextView
-    lateinit var overview: TextView
-    lateinit var popularity: TextView
-    lateinit var releaseDate: TextView
+
+    private lateinit var poster: ImageView
+    private lateinit var originalTitle: TextView
+    private lateinit var overview: TextView
+    private lateinit var popularity: TextView
+    private lateinit var releaseDate: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,8 +35,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_preview) {
             releaseDate = findViewById(R.id.releaseDate)
         }
 
-        val movieId = arguments?.getInt(ARG_ID) ?: 550
-        val movie = //получаем фильм
+        arguments?.getInt(ARG_ID)?.also { movieId ->
+            Client.movie(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(::show, Throwable::printStackTrace)
+        }
+    }
+
+    private fun show(movie: Movie) {
         poster.load("${BuildConfig.API_IMAGE_BASE_URL}${movie.posterPath}") {
             transformations(RoundedCornersTransformation(16f))
         }
@@ -37,15 +51,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_preview) {
         overview.text = movie.overview
         popularity.text = movie.popularity.toString()
         releaseDate.text = movie.releaseDate
-
-        activity?.onBackPressedDispatcher?.addCallback(this.viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val manager: FragmentManager = parentFragmentManager
-                val transaction: FragmentTransaction = manager.beginTransaction()
-                transaction.replace(R.id.mainFragment, MovieListFragment())
-                transaction.commit()
-            }
-        })
     }
 
     companion object {

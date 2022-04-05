@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainFragment"
-        android:name="com.pg.homeworknetwork.MovieListFragment"
+        android:name="com.pg.homeworknetwork.ui.MovieListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

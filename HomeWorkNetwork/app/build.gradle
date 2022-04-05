@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
 
-        buildConfigField "String", "API_BASE_URL", '"api.themoviedb.org"'
-        buildConfigField "String", "API_KEY", '"/*ваш ap_key*/"'
+        buildConfigField "String", "API_BASE_URL", '"https://api.themoviedb.org/"'
+        buildConfigField "String", "API_KEY", '"e503242523fdb26da76074761c83067e"'
         buildConfigField "String", "API_IMAGE_BASE_URL", '"https://image.tmdb.org/t/p/w500"'
 
         applicationId "com.pg.homeworknetwork"
@@ -42,6 +42,17 @@ dependencies {
     implementation "io.coil-kt:coil-compose:2.0.0-rc02"
 
     //--------------------------------------------------------------------------------------------------------------
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'

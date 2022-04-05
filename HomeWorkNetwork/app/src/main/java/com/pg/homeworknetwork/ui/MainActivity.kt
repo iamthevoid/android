@@ -1,7 +1,8 @@
-package com.pg.homeworknetwork
+package com.pg.homeworknetwork.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.pg.homeworknetwork.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
