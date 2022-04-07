@@ -1,8 +1,11 @@
 package com.pg.homeworknetwork
 
+import com.pg.homeworknetwork.data.Movie
+import com.pg.homeworknetwork.ui.movie.MovieDetailPresenter
+import com.pg.homeworknetwork.ui.movie.MovieDetailView
+import io.reactivex.rxjava3.schedulers.Schedulers
+import org.junit.Assert
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +15,16 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        val presenter = MovieDetailPresenter(550, object : MovieDetailView {
+            override fun onTitleCalculated(titleRes: Int, title: String) {
+                println(title)
+            }
+
+            override fun onMovieDataReceived(movie: Movie) {
+                println(movie)
+                Assert.assertEquals(movie.originalTitle, "Moonfall")
+            }
+        }, scheduler = Schedulers.trampoline(), ioScheduler = Schedulers.trampoline())
+        presenter.onCreate()
     }
 }

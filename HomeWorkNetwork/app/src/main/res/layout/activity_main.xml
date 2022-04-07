@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainFragment"
-        android:name="com.pg.homeworknetwork.ui.MovieListFragment"
+        android:name="com.pg.homeworknetwork.ui.list.MovieListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

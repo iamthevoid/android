@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HomeWorkNetwork</string>
+    <string name="page_title">Movie: %s</string>
 </resources>
